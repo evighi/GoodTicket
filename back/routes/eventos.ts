@@ -1,4 +1,4 @@
-import { Router } from 'express'
+/*import { Router } from 'express'
 import axios from 'axios'
 import { PrismaClient } from '@prisma/client'
 
@@ -7,7 +7,7 @@ const prisma = new PrismaClient()
 
 const SYMPLA_TOKEN = process.env.SYMPLA_TOKEN
 /* const ORGANIZADOR_ID = process.env.SYMPLA_ORGANIZADOR_ID */// se você quiser deixar isso dinâmico ou fixo
-
+/*
 router.get('/importar-sympla', async (req, res) => {
   try {
     const response = await axios.get(`https://api.sympla.com.br/public/v3/events`, {
@@ -75,3 +75,4 @@ router.get('/', async (req, res) => {
 
 
 export default router
+*/

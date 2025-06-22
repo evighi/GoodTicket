@@ -32,12 +32,19 @@ export default function Cadastro() {
   }
 
   return (
-    <section style={{ backgroundColor: "rgba(36, 36, 40, 1)" }} className="min-h-screen flex items-center justify-center">
-      <div className="w-full rounded-lg sm:max-w-md p-8">
+    <main className="flex flex-col items-center justify-center flex-grow px-4 py-12" style={{ backgroundColor: "rgba(36, 36, 40, 1)" }}>
+      <section className="w-full rounded-lg sm:max-w-md p-8">
         <div className="space-y-6">
-          <div className="flex justify-center mb-4">
-            <img src="/goodticket.png" alt="Logo" className="h-10" />
+          <div className="flex justify-center mb-4 pt-10">
+            <Link href="/">
+              <img
+                src="/goodticket.png"
+                alt="Logo"
+                className="h-10 cursor-pointer transition hover:scale-105"
+              />
+            </Link>
           </div>
+
           <h1 style={{ color: "rgba(20, 200, 113, 1)" }} className="text-xl font-bold">
             Crie sua conta!
           </h1>
@@ -96,7 +103,8 @@ export default function Cadastro() {
             </p>
           </form>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
   )
+
 }

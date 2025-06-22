@@ -1,14 +1,23 @@
+"useCliente";
+
 import { ClienteItf } from '@/utils/types/ClienteItf';
 import { create } from 'zustand';
 
+
 type ClienteStore = {
-  cliente: ClienteItf | null;                 // ← pode ser null
+  cliente: ClienteItf | null;
   logaCliente: (clienteLogado: ClienteItf) => void;
   deslogaCliente: () => void;
 };
 
 export const useClienteStore = create<ClienteStore>((set) => ({
-  cliente: null,                              // ← começa sem usuário
+  cliente: null,
   logaCliente: (clienteLogado) => set({ cliente: clienteLogado }),
-  deslogaCliente: () => set({ cliente: null }), // ← limpa
+  deslogaCliente: () => {
+    localStorage.removeItem("clienteKey");
+    localStorage.removeItem("token");
+    set({ cliente: null });
+  },
 }));
+
+// ✅ Hook para restaurar cliente com base em clienteKey

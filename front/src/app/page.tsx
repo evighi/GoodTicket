@@ -1,45 +1,59 @@
 "use client";
-import { CardImovel } from "@/components/CardImovel";
-import { InputPesquisa } from "@/components/InputPesquisa";
-import { ImovelItf } from "@/utils/types/ImovelItf";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEventosStore } from "@/context/EventosStore";
+import { CardEvento } from "@/components/CardEvento";
+import { SecaoCidadesPopulares } from "@/components/SecaoCidadesPopulares";
+import { SecaoRevendas } from "@/components/SecaoRevendas";
+import { useEffect } from "react";
+import RevendaIngresso from "@/components/RevendaIngresso";
+import { SecaoGeneros } from "@/components/SecaoGeneros";
 
 export default function Home() {
-  const [imoveis, setImoveis] = useState<ImovelItf[]>([])
+  const { eventos, setEventos, limparFiltros } = useEventosStore();
+  const router = useRouter();
 
-  // useEffect (efeito colateral): executa algo quando o componente
-  // é renderizado (no caso, quando [])
   useEffect(() => {
     async function buscaDados() {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/imoveis`)
-      const dados = await response.json()
-      // console.log(dados)
-      setImoveis(dados)
+      const response = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/events`);
+      const dados = await response.json();
+      setEventos(dados);
     }
-    buscaDados()
-  }, [])
-
-  const listaImoveis = imoveis.map(imovel => (
-    <CardImovel data={imovel} key={imovel.id} />
-  ))
+    buscaDados();
+  }, [setEventos]);
 
   return (
     <>
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <img
           src="/banner.png"
           alt="Banner promocional"
-          className="w-full max-h-96 object-cover"
+          className="w-full max-h-120"
         />
       </div>
-      <InputPesquisa setImoveis={setImoveis} />
-      <div className="max-w-7xl mx-auto">
-        <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-          Imoveis <span className="underline underline-offset-3 decoration-8 decoration-orange-400 dark:decoration-orange-600"></span>
-        </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-          {listaImoveis}
-        </div>
+      <div>
+        <SecaoCidadesPopulares />
+        <SecaoGeneros />
+        {eventos.length > 0 && (
+          <div className="max-w-5xl mx-auto mt-10">
+            <div id="eventos" className="flex flex-col md:flex-row items-center justify-center gap-4 mb-6">
+              <h2 className="text-2xl font-bold text-white">Eventos Disponíveis</h2>
+              <button
+                onClick={limparFiltros}
+                className="text-sm bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md transition cursor-pointer"
+              >
+                Limpar busca
+              </button>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {eventos.map((evento) => (
+                <CardEvento key={evento.id} data={evento} />
+              ))}
+            </div>
+          </div>
+        )}
+
+
+        <SecaoRevendas />
       </div>
     </>
   );

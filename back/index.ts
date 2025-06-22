@@ -5,7 +5,8 @@ import routesLogin from './routes/login'
 import routesAdmins from './routes/admins'
 import routesClientes from './routes/clientes'
 import routesRevendas from './routes/revendas'
-import routesEventos from './routes/eventos'
+import routesSymplaPython from './routes/symplaPython'
+/*import routesEventos from './routes/eventos'*/
 
 const app = express()
 const port = 3001
@@ -17,7 +18,8 @@ app.use('/clientes', routesClientes);
 app.use('/login', routesLogin); 
 app.use('/admins', routesAdmins); 
 app.use('/revendas', routesRevendas)
-app.use('/eventos', routesEventos)
+app.use('/symplaPython', routesSymplaPython)
+/*app.use('/eventos', routesEventos)*/
 
 app.get('/', (req, res) => {
   res.send('API: Good Ticket')

@@ -44,16 +44,24 @@ model Evento {
 }
 
 model Revenda {
-  id             String    @id @default(uuid())
-  clienteId      String
-  eventoLocal    String
-  quantidade     Int
-  precoOriginal  Float
-  precoRevenda   Float
-  numeroTelefone String
-  status         String
-  dataAnuncio    DateTime  @default(now())
-  dataVenda      DateTime?
+  id              String    @id @default(uuid())
+  clienteId       String
+  eventoId        String     // <-- ID do evento externo (ex: da Sympla)
+  descricaoEvento String     // Nome do evento (do Sympla)
+  eventoLocal     String
+  eventoImagem    String?    // <-- Nova: URL da imagem do evento
+  eventoUrl       String?    // <-- Nova: Link do evento no Sympla
+  cidade          String?    // <-- Nova: Cidade do evento
+  startDate       DateTime?  // <-- Nova: Data do evento (convertido de string no momento do cadastro)
+
+  quantidade      Int
+  precoOriginal   Float
+  precoRevenda    Float
+  numeroTelefone  String
+  status          String
+  dataAnuncio     DateTime  @default(now())
+  dataVenda       DateTime?
 
   cliente Cliente @relation(fields: [clienteId], references: [id])
 }
+
