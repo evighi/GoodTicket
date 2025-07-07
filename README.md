@@ -51,7 +51,7 @@ python -m venv venv
 # Ative o ambiente virtual:
 # No PowerShell: `.\venv\Scripts\Activate.ps1`
  # (Lembrete rápido: se o PowerShell reclamar de política de execução, use `Set-ExecutionPolicy RemoteSigned -Scope Process` antes de ativar).
-  # No CMD (Prompt de Comando normal):** `venv\Scripts\activate.bat`
+  # No CMD (Prompt de Comando normal): `venv\Scripts\activate.bat`
        # (Você vai ver um `(venv)` no começo do prompt se der certo).
 
 # Instale as Dependências do Backend:
